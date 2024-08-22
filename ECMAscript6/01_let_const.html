@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 변수선언 키워드</title>
+</head>
+<body>
+
+    <script>
+
+        //ECMAscript6(2015년 발표 버전 : es6 or es2015)의 새로운 문법 등장
+
+        //1. 변수 선언 키워드 추가 : let(변수), const(상수)
+
+        //기존의 var변수
+        var a=10
+        document.write(a+"<br>")
+
+        var a=20
+        document.write(a+"<br>")
+
+        //새로운 let 변수
+        let b=100
+        document.write(b+"<br>")
+
+        //let b=200 // error - 치명적 에러(문법 에러)
+
+        b=200
+        document.write(b+"<br>")
+
+        // 새로운 const 변수 : 상수화된 변수
+        const c=1000
+        document.write(c+"<br>")
+
+        // c=2000 //에러 - 예외상황
+        // document.write(c+"<br>")
+
+        //const c= 3000 //문법 에러
+
+        //*개선사항 : 같은이름의 변수를 만드는 실수를 방지할 수 있음. 상수화된 변수
+
+        //또 다른 개선사항.. 변수의 인식범위를 개선함.. 지역의 의미가 다름..
+        //var 키워드는 함수 {}를 지역으로 인식함
+        //let, const 키워드는 {}를 지역으로 인식함.
+
+        //var의 지역 범위 알아보기
+        function aaa(){
+            var n=5 //지역변수
+            document.write(n+"<br>")
+        }
+
+        aaa() //함수 호출
+        //document.write(n+"<br>") //지역변수 n을 인식하지 못함 - 에러[예외발생]
+
+        if(true){
+            var k=10
+            document.write(k+"<br>")
+        }
+
+        document.write(k+"<br>") //잘 인식함 - 함수{}가 아닌 것은 지역이 아님..
+
+        //let, const {}면 다 지역..
+        if(true){
+            let p=7
+            document.write(p+"<br>")
+        }
+        //document.write(p+"<br>") //에러 - 인식못함
+
+        for(var i=0; i<3; i++){
+            document.write('aaa<br>')
+        }
+        document.write('i:'+i+"<br>")
+
+        for(let j=0; j<3; j++){
+            document.write('aaa<br>')
+        }
+        //document.write('j:'+j+"<br>")//에러 - 인식못함
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

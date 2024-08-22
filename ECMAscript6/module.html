@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 module</title>
+</head>
+<body>
+
+    <!-- JS에서 다른 JS파일을 가져오는 문법 [아직 일반 web에서는 바로 동작하지는 않음][서버에서만 가능함] -->
+    <script type="module">
+        import show from'./module_aaa.js'
+        import {output, num} from './module_aaa.js'
+
+        import {age as gg} from './module_aaa.js'
+
+        show()
+        output("sam")
+        output("robin")
+        alert(num+","+gg)
+
+    </script>
+
+    
+</body>
+</html>

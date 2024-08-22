@@ -1,0 +1,22 @@
+.todoContainer{
+    width: 500px;
+    margin: 5rem auto;
+    border: 1px solid black;
+    border-radius: 6px;
+    overflow: hidden;
+
+    .app-title{
+        background-color: lightyellow;
+        color: black;
+        font-size: 2rem;
+        font-weight: bold;
+        height: 5rem;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+
+}
+

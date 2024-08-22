@@ -1,0 +1,54 @@
+.todoItem{
+    background-color: antiquewhite;
+
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    align-items: center;
+    
+
+    &:hover{
+        background-color: bisque;
+    }
+
+    .checkbox{
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        padding: 2px;
+    }
+
+    .content{
+        flex: 1;
+        margin-left: 1rem;
+    }
+
+    .delete{
+        font-size: 20px;
+        color: red;
+
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 2px;
+    }
+
+    //현재 요소(TodoItem)의 다음에 또 TodoItem이 왔을때 그 녀석의 스타일
+    &+&{
+        border-top: 1px solid orange;
+    }
+
+    //현재 요소(TodoItem)의 체크된 항목의 스타일
+    &.isDone{
+        // color: blue;
+        // font-weight: bold;
+        .checkbox{
+            color: orange;
+        }
+        .content{
+            color: gray;
+            text-decoration: line-through;
+        }
+    }
+    
+}

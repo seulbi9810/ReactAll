@@ -1,0 +1,41 @@
+.todoInput{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+
+    input{
+        flex: 1; //flex-grow의 축약표현 - weight같은 역할
+        padding: 1rem;
+        border: none;
+        outline: none; //focus 받을 때 아웃라인.. 제거
+        font-size: 1.2rem;
+        
+        
+        &::placeholder {
+            color: black;
+        }
+    }
+    button{
+        border: none;
+        background-color:orange;
+        color: black;
+        padding: 1rem;
+        font-size: 20px;
+        
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        
+        &:hover{
+            background-color: orangered;
+        }
+        &:active{
+            background-color: red;
+        }
+
+        transition: background-color .5s;
+
+
+    }
+}

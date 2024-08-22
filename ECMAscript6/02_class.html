@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 class키워드</title>
+</head>
+<body>
+
+    <script>
+
+        //객체를 생성하는 새로운 방법 : class 키워드 등장 [java언어와 사용법 유사함]
+
+        //JS에서 객체를 생성하는 기존 방법 2가지
+        //1. 리터럴 객체 - 객체를 생성하면서 멤버를 설계하는 방식 
+        var person= {
+            name:"sam",
+            age:20,
+            show:function(){
+                document.write(this.name+":"+this.age+"<br>")
+            }
+        }
+        person.show()
+
+        //2. 생성자 함수 - 자바의 class설계도면 역할을 하는 함수 [new키워드로 객체생성]
+        function Person(name, age=0){
+            //멤버변수 - property 프로퍼티(속성)
+            this.name= name
+            this.age= age
+            //let name //지역변수 - 멤버변수 아님
+
+            //멤버함수 - method 메소드(기능,동작)
+            this.show=function(){
+                document.write("Person show: " + this.name +","+this.age+"<br>")
+            }
+        }
+        
+        //객체 생성
+        let p= new Person('sam',20)
+        p.show()
+
+        let p2= new Person('robin',25)
+        p2.show()
+
+        let p3= new Person()
+        p3.show()
+
+        //3. 객체를 설계하는 새로운 키워드 class
+        class Human{
+            //멤버변수 - property
+            //let name - error
+            //this.name - error
+
+            //아무 키워드 없이 변수명을 사용하면 멤버변수
+            name="sam"
+            age=20
+            address //값이 없어도 됨. - undefined
+
+            //멤버함수 - method
+            //funtion aaa(){}-error
+            //키워드 없이 함수 정의
+            show(){
+                document.write("name: "+ this.name+", age: "+this.age+"<br>")
+            }
+
+            //익명함수로 메소드 만들기
+            display= function(){
+                document.write("display")
+            }
+        }
+
+        //객체 생성
+        let human = new Human()
+        human.show()
+
+        document.write(human.address+"<br>")        
+    </script>
+    
+    <hr>
+
+    <script>
+        let human2= new Human()
+        human2.show()
+
+        //JS는 아주 유연한 언어임. 그래서..설계에 없던 멤버를 객체생성 후 추가할 수 있음.
+        human2.tel="010-1234-5678"
+        document.write(human2.tel + "<br>")
+        document.write(human.tel + "<br>")//undefined...
+
+        //address와 tel값도 같이 출력해주는 기능메소드를 human2객체에 추가하기 
+        human2.out=function(){
+            document.write(this.name+","+this.age+","+this.address+","+this.tel+"<br>")
+
+        }
+        human2.out()
+    </script>
+
+    <hr>
+
+    <script>
+        //class 키워드의 생성자 함수 사용해보기
+        class Student{
+
+            //생성자 함수
+            constructor(name='익명', age=0, major){
+                this.name= name
+                this.age= age
+                this.major=major
+                this.college="미래캠퍼스"
+
+            }
+
+            show(){
+                document.write("Student : " + this.name+", "+this.age+" - "+this.major+"<br>")
+            }
+
+            //리턴값이 있는 메소드
+            aaa(a,b){
+                return a+b
+            }
+
+            bbb= this.aaa(3,4) // 7 - 멤버함수 접근할때도 this 키워드 필요함 
+            ccc= this.aaa // 멤버함수 접근할때도 this 키워드 필요함 
+        }
+
+        const stu= new Student('sam',20,'ios')
+        stu.show()
+
+        const stu2= new Student('robin',22,'webapp')
+        stu2.show()
+
+        const stu3= new Student()
+        stu3.show()
+
+        let a = stu.aaa(5,3)
+        document.write(a+"<br>")
+
+        document.write(stu.bbb+"<br>")
+        document.write(stu.ccc+"<br>")
+
+    </script>
+
+    <hr>
+
+    <script>
+        //오버로딩이 존재하는가?
+        class Member{
+            constructor(id='익명', pw='1111'){
+                this.id= id
+                this.pw= pw
+            }
+
+            //생성자 오버로딩은 에러..
+            // constructor(){
+            //     this.id='익명'
+            //     this.pw='1111'
+            // }
+
+            show(){
+                document.write(this.id+","+this.pw+"<br>")
+            }
+
+            //덮어쓰기가 됨...overwrite [즉, 오버로딩은 없음]
+            show(a){
+                document.write('오버로딩되나??'+a+"<br>")
+            }
+        }
+
+        const m= new Member('sam','1234')
+        m.show()
+
+        const m2= new Member()
+        m2.show(10)
+    </script>
+
+    <hr>
+
+    <script>
+        //상속
+
+        //상속해줄 부모클래스
+        class First{
+            constructor(a){
+                this.a=a
+            }
+            show(){
+                document.write('a: '+this.a)
+            }
+        }
+
+        const f= new First(10)
+        f.show()
+        document.write("<br>")
+
+        //First를 상속하는 Second
+        class Second extends First{
+            constructor(a,b){
+                //반드시 부모생성자를 명시적으로 호출해야만 함.
+                super(a)
+                this.b= b
+            }
+            //오버라이드
+            show(){
+                super.show()//부모의 show.. 
+                document.write("b: "+this.b+"<br>")
+            }
+        }
+
+        const s= new Second(10,20)
+        s.show()
+
+    </script>
+
+    <hr>
+
+    <script>
+
+        //객체를 생성하지 않고 클래스명으로 직접 접근하여 사용하는 멤버 - static 키워드
+        class Nice{
+            static show(){
+                document.write("static show...")
+            }
+
+            static name="kim"
+        }
+
+        Nice.show()
+        document.write(Nice.name+"<br>")
+
+        //클래스설계된 후에 새로운 static 멤버추가도 가능함
+        Nice.num=20
+        document.write(Nice.num+"<br>")
+
+        const nice= new Nice()
+        //nice.show() //error - 객체로는 static 접근 안됨
+
+    </script>
+
+    <hr>
+
+    <script>
+
+        //구조 분해 할당 (비구조화 할당 이라고도 부름) -- REACT가 사랑함
+        class Good{
+            name="sam"
+            age=20
+            address="seoul"
+        }
+
+        let good= new Good()
+        document.write(good+"<br>")
+        document.write("name: "+good.name+"<br>")
+        document.write("age: "+good.age+"<br>")
+        document.write("address: "+good.address+"<br>")
+
+        //매번 good. 이라는 키워드 작성 짜증!!!
+        // let name= good.name
+        // let age= good.age
+        let{name, age, addr}=good //구조분행할당으로 만든 변수명은 멤버변수명과 같아야만 함
+        document.write("name: "+name+"<br>")
+        document.write("age: "+age+"<br>")
+        document.write("address: "+addr+"<br>")
+
+        //Good객체의 멤버값 중 name과 address를 출력해주는 기능 함수
+        function showGood({name, address}){
+            document.write(name+"<br>")
+            document.write(address+"<br>")
+        }
+        
+        showGood(good)
+
+        //조금 특이하게 구조분해 할당하기
+        class Bad{
+            aaa=10
+            bbb=20
+            ccc=30
+            ddd=40
+        }
+
+        const bad= new Bad()
+        const {aaa, ...rest}=bad // ...rest를 통해서 나머지 멤버들을 객체로 할당받기 [변수명은 자유]
+        document.write(aaa+"<br>")
+        document.write(rest.bbb+"<br>")
+        document.write(rest.ccc+"<br>")
+        document.write(rest.ddd+"<br>")
+
+    </script>
+    
+</body>
+</html>
